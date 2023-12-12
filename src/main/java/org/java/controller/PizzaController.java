@@ -39,6 +39,12 @@ public class PizzaController {
 	// METODO CHE CHIAMA TUTTE LE PIZZE NEL DB DA MOSTRARE NELLA HOME
 
 	@GetMapping("/")
+	public String home() {
+		return "index-home";
+
+	}
+
+	@GetMapping("/home")
 	public String getPizzas(Model model, @RequestParam(required = false) String query) {
 
 		List<Pizza> pizzas = query != null ? pizzaService.findByPizzaNameOrIngredient(query) : getAllPizzas();
@@ -51,7 +57,7 @@ public class PizzaController {
 		model.addAttribute("query", query);
 		model.addAttribute("pizzasList", pizzas);
 
-		return "index-home";
+		return "index-pizzas-list";
 
 	}
 
@@ -129,7 +135,7 @@ public class PizzaController {
 		// FRONTEND UNA NOTIFICA DI QUALE ELEMENTO E' STATO ELIMINATO
 		redirectAtr.addFlashAttribute("pizzaDeleted", pizza);
 
-		return "redirect:/";
+		return "redirect:/home";
 
 	}
 
