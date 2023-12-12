@@ -2,6 +2,11 @@ package org.java;
 
 import java.math.BigDecimal;
 
+import org.java.auth.config.AuthConf;
+import org.java.auth.db.Role;
+import org.java.auth.db.User;
+import org.java.auth.serv.RoleService;
+import org.java.auth.serv.UserService;
 import org.java.db.pojo.Ingredient;
 import org.java.db.pojo.Pizza;
 import org.java.db.serv.IngredientService;
@@ -19,6 +24,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 
 	@Autowired
 	private IngredientService ingredientService;
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -109,6 +120,20 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		pizzaService.save(pizza8);
 		pizzaService.save(pizza9);
 		pizzaService.save(pizza10);
+
+		Role role1 = new Role("USER");
+		Role role2 = new Role("ADMIN");
+
+		roleService.save(role1);
+		roleService.save(role2);
+
+		String psw = AuthConf.passwordEncoder().encode("pws");
+
+		User user1 = new User("user", psw, role1);
+		User user2 = new User("admin", psw, role2);
+
+		userService.save(user1);
+		userService.save(user2);
 
 	}
 
