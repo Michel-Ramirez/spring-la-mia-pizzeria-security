@@ -127,7 +127,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		roleService.save(role1);
 		roleService.save(role2);
 
-		String psw = AuthConf.passwordEncoder().encode("pws");
+		String psw = AuthConf.passwordEncoder().encode("psw");
 
 		User user1 = new User("user", psw, role1);
 		User user2 = new User("admin", psw, role2);
