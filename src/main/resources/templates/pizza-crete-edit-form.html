@@ -32,7 +32,9 @@
 
         <div th:replace="fragments :: back-to-home"></div>
 
-        <form class="d-flex justify-content-center" method="POST" th:object="${pizza}">
+        <form class="d-flex justify-content-center" method="POST" th:object="${pizza}" >
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
             <div class="wrapper">
                 <div class="d-flex justify-content-between">
